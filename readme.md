@@ -8,6 +8,7 @@ the inherent randomness of statistical data generation.
 <br/><br/>
 ![screenshot](https://github.com/huda-lab/synner/blob/resources/synner-ui-sigmod.png)
 
+**Note:** This is a **fork** of https://github.com/huda-lab/synner which includes a Dockerfile (to build and run) and additional installation instructions (i.e. you need to run bower to download additional javascript dependencies). 
 
 ## Publications
 
@@ -31,11 +32,35 @@ the inherent randomness of statistical data generation.
 
 This repository contains:
 
-Synner's source code and the datasets we used for our publications.
+Synner's source code, the datasets that were used in the publication and a Dockerfile to run locally.
 
 ## How to run Synner
 
 Synner can be run as a server, which also provides the user interface, or as a command line interface application.
+
+### Running the user interface in a local Docker container
+
+You will need Docker and npm installed.
+
+1. Clone the repo
+```
+  $ git clone https://github.com/aneesha/synner.git
+```
+2. Install Bower and then install the required javascript dependencies
+```
+  $ cd synner/synner-server/src/main/resources/static
+  $ npm install bower -g
+  $ bower install
+```
+3. Build the docker image 
+```
+  $ docker image build -t docker-synner .
+```
+4. Run the docker container
+```
+  $ docker container run -p 5000:5000 docker-synner
+```
+5. Go to http://localhost:5000 in a web browser
 
 
 ### Running the server
@@ -55,7 +80,3 @@ This method accepts a path of a CSV file as console argument, where specificatio
 ```
   java -classpath "..." edu.nyu.dtl.synner.core.Main my-specifications.json
 ```
-
-
-
-
